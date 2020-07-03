@@ -1,17 +1,13 @@
-# Ticket Mock Server
-Тестовый api mock-сервер на основе [Exser](https://github.com/ylabio/exser) (node.js).
-
-## Основное назначение
-Написание и тестирование скелетонов frontend приложений на React (Javascript) и Flutter (Dart). 
+# Conference Peer Server
+Сервер для проведения аудио-видео конференций в браузере через WebRTC на основе [Exser](https://github.com/ylabio/exser) и [PeerServer](https://github.com/peers/peerjs-server).
 
 ## Основные сущности
 - Пользователи
-- Тикеты (карточки)
 
 ## Основные пути
-REST API: http://localhost:8160/api/v1<br/>
-API docs: http://localhost:8160/api/v1/docs
-
+REST API: http://localhost:8160/api/v1 <br/>
+API docs: http://localhost:8160/api/v1/docs <br/>
+Peer Server: http://localhost:9000/conference
 
 ## Тестовый пользователь
 login: test<br/>
