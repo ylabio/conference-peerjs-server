@@ -1,0 +1,48 @@
+###
+# GET list
+
+GET {{baseUrl}}/rooms
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###
+# GET by id
+
+GET {{baseUrl}}rooms/5f0040f7c91f2a16d73d5ecc?fields=_id,name,title,description&lang=all
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###
+# CREATE one
+
+POST {{baseUrl}}rooms?fields=_id,name,title,description
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "name":"testers",
+  "title":"Testers",
+  "description": "Конференция тестировщиков"
+}
+
+###
+# UPDATE by id
+
+PUT {{baseUrl}}rooms/5f0045720d61371988c98548?fields=_id,name,title,description,isDeleted
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "name":"testers",
+  "title":"Testers",
+  "isDeleted": false
+}
+
+###
+# DELETE by id
+
+DELETE {{baseUrl}}rooms/5f0045720d61371988c98548?fields=_id,name,title,description,isDeleted
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###

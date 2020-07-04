@@ -135,6 +135,7 @@ module.exports = {
         {name: 'Roles', description: 'Роли'},
         {name: 'Files', description: 'Файлы'},
         // {name: 'Support', description: 'Техподдержка'},
+        {name: 'Rooms', description: 'Комнаты конференций'},
       ],
       // externalDocs: {
       //   description: 'Исходник для импорта в postman',

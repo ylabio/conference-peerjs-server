@@ -3,4 +3,5 @@ module.exports = {
   users: require('./users'),
   roles: require('./roles'),
   files: require('./files'),
+  rooms: require('./rooms'),
 };

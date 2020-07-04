@@ -15,6 +15,7 @@ class Init {
   async start(){
     await this.initUsersAdmin();
     await this.initUsers();
+    await this.initRooms();
   }
 
   async initUsersAdmin() {
@@ -102,6 +103,29 @@ class Init {
           filter: {_key: body._key},
           body,
           session
+        })));
+      }
+    }
+    return this.data[type];
+  }
+
+  async initRooms() {
+    const type = 'room';
+    if (!this.data[type]) {
+      let items = [
+        {name: 'javascript', title: {ru: 'Javascript', en: 'Javascript'}, description: {ru: 'Конференция Javascript разработчиков', en: 'Javascript developers conference'}},
+        {name: 'php', title: {ru: 'Php', en: 'Php'}, description: {ru: 'Конференция Php разработчиков', en: 'Php developers conference'}},
+        {name: 'python', title: {ru: 'Python', en: 'Python'}, description: {ru: 'Конференция Python разработчиков', en: 'Python developers conference'}},
+        {name: 'go', title: {ru: 'Go', en: 'Go'}, description: {ru: 'Конференция Go разработчиков', en: 'Conference Go developers'}},
+        {name: 'rust', title: {ru: 'Rust', en: 'Rust'}, description: {ru: 'Конференция Rust разработчиков', en: 'Rust developers conference'}},
+        {name: 'managers', title: {ru: 'Managers', en: 'Managers'}, description: {ru: 'Конференция менеджеров', en: 'Managers conference'}},
+        {name: 'accountants', title: {ru: 'Accountants', en: 'Accountants'}, description: {ru: 'Конференция бухгалтеров', en: 'Accountants conference'}},
+      ];
+      this.data[type] = [];
+      for (let body of items) {
+        this.data[type].push(objectUtils.merge(body, await this.s.storage.get(type).upsertOne({
+          filter: {name: body.name},
+          body
         })));
       }
     }
