@@ -12,14 +12,14 @@ Content-Type: application/json
 ###
 # GET by id
 
-GET {{baseUrl}}users/5d0176ac7dd93011d8159d51?fields=_id,email,profile(*)
+GET {{baseUrl}}users/5f00316d96fcf50daea7ff61?fields=_id,email,profile(*)
 X-Token:{{tokenAdmin}}
 Content-Type: application/json
 
 ###
 # Change password
 
-PUT {{baseUrl}}users/5d0176ac7dd93011d8159d51/password
+PUT {{baseUrl}}users/5f00316d96fcf50daea7ff61/password
 X-Token:{{tokenAdmin}}
 Content-Type: application/json
 
@@ -29,16 +29,18 @@ Content-Type: application/json
 }
 
 ###
-# Create or registre new user
+# Create or register new user
 
 POST {{baseUrl}}/users?fields=order
 Content-Type: application/json
 
 {
-  "email": "boolive@yandex.ru",
+  "email": "peter@example.com",
+  "username": "peter",
+  "password": "123456",
   "profile": {
-    "name": "Владимир",
-    "surname": "Шестаков"
+    "name": "Peter",
+    "surname": "Falcon"
   }
 }
 
