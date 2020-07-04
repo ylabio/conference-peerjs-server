@@ -7,15 +7,14 @@ class Role extends Model {
     return {
       collection: 'role',
       indexes: this.spec.extend(parent.indexes, {
-        //relativeId: [{'relative._id': 1}],
+        // relativeId: [{'relative._id': 1}],
       }),
       model: this.spec.extend(parent.model, {
         title: 'Роль',
         properties: {
-          name: {type: 'string', description: 'Кодовое название', minLength: 2, maxLength: 200},
-          title: this.spec.generate('i18n', {description: 'Заголовок', minLength: 2, maxLength: 200}),
-          description: this.spec.generate('i18n', {description: 'Описание', default: '', maxLength: 100}),
-          priceClient: {type: 'number', description: 'Ставка клиента', default: 1200}
+          name: {type: 'string', description: 'Кодовое название', minLength: 2, maxLength: 64},
+          title: this.spec.generate('i18n', {description: 'Заголовок', minLength: 2, maxLength: 64}),
+          description: this.spec.generate('i18n', {description: 'Описание', default: '', maxLength: 255}),
         },
         required: ['name', 'title'],
       })

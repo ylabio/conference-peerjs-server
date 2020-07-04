@@ -15,7 +15,6 @@ class Init {
   async start(){
     await this.initUsersAdmin();
     await this.initUsers();
-    await this.initTickets();
   }
 
   async initUsersAdmin() {
@@ -23,15 +22,15 @@ class Init {
     if (!this.data['user-admin']) {
       const roles = await this.initRoles();
       let body = {
-        _key: 'test-user',
+        _key: 'test-admin',
         username: 'test',
         email: 'test@example.com',
         phone: '+70000000000',
         password: '123456',
         role: {_id: roles.find(s => s.name === 'admin')._id},
         profile: {
-          name: 'AdminName1',
-          surname: 'AdminSurname'
+          name: 'TestAdminName',
+          surname: 'TestAdminSurname'
         }
       };
 
@@ -60,7 +59,7 @@ class Init {
     const type = 'role';
     if (!this.data[type]) {
       let items = [
-        {name: 'admin', title: {ru: 'Админ', en: 'Admin'}},
+        {name: 'admin', title: {ru: 'Администратор', en: 'Admin'}},
         {name: 'user', title: {ru: 'Пользователь', en: 'User'}}
       ];
       this.data[type] = [];
@@ -84,18 +83,18 @@ class Init {
       const roles = await this.initRoles();
       const session = await this.initSession();
       let items = [
-        // {
-        //   _key: 'user1',
-        //   email: 'petya@example.com',
-        //   phone: '+79993332211',
-        //   password: 'password',
-        //   username: 'petya',
-        //   role: {_id: roles.find(s => s.name === 'middle-js')._id},
-        //   profile: {
-        //     name: 'Владимир',
-        //     surname: 'Шестаков'
-        //   }
-        // },
+        {
+          _key: 'test-user',
+          username: 'user',
+          email: 'user@example.com',
+          phone: '+79993332211',
+          password: '123456',
+          role: {_id: roles.find(s => s.name === 'user')._id},
+          profile: {
+            name: 'TestUserName',
+            surname: 'TestUserSurname'
+          }
+        },
       ];
       this.data[type] = [];
       for (let body of items) {
@@ -103,31 +102,6 @@ class Init {
           filter: {_key: body._key},
           body,
           session
-        })));
-      }
-    }
-    return this.data[type];
-  }
-
-  async initTickets() {
-    const type = 'ticket';
-    if (!this.data[type]) {
-      const session = await this.initSession();
-      const imageUrl = 'https://picsum.photos/id'; // 'https://picsum.photos/id/1/640/480'
-      this.data[type] = [];
-      for (let i = 0; i < 100; i++) {
-        const key = i + 1;
-        const body = {
-          _key: `ticket${key}`,
-          title: `Ticket #${key}`,
-          content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-          image: {url: `https://picsum.photos/id/${key}/640/480`},
-          isBookmark: false,
-        };
-        this.data[type].push(objectUtils.merge(body, await this.s.storage.get(type).upsertOne({
-          filter: {_key: body._key},
-          body,
-          session,
         })));
       }
     }

@@ -36,13 +36,13 @@ class User extends Model {
         properties: {
           email: {
             type: 'string',
-            //format: 'email',
+            // format: 'email',
             maxLength: 100,
             errors: {format: 'Incorrect format'}
           },
           username: {
             type: 'string',
-            //format: 'email',
+            // format: 'email',
             maxLength: 100,
           },
           password: {type: 'string', minLength: 6, errors: {minLength: 'At least 6 characters'}},

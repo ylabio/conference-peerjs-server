@@ -133,9 +133,8 @@ module.exports = {
       tags: [
         {name: 'Users', description: 'Пользователи'},
         {name: 'Roles', description: 'Роли'},
-        //{name: 'Support', description: 'Техподдержка'},
         {name: 'Files', description: 'Файлы'},
-        {name: 'Ticket', description: 'Тикеты (карточки)'},
+        // {name: 'Support', description: 'Техподдержка'},
       ],
       // externalDocs: {
       //   description: 'Исходник для импорта в postman',
