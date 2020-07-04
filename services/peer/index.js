@@ -18,6 +18,8 @@ class Peer {
       return this.peerServer;
     }
     this.peerServer = PeerServer(this.config);
+    this.peerServer.on('connection', (client) => console.log('peer connection:', client.id));
+    this.peerServer.on('disconnect', (client) => console.log('peer disconnect:', client.id));
     return this.peerServer;
   }
 }
