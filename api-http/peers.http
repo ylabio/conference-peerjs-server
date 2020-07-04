@@ -1,0 +1,48 @@
+###
+# GET list
+
+GET {{baseUrl}}/peers
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###
+# GET by id
+
+GET {{baseUrl}}peers/5f004c3e3bfade1e9c797aa2?fields=_id,peerId,user(*),room(*)&lang=all
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###
+# CREATE one
+
+POST {{baseUrl}}peers?fields=_id,peerId,user(*),room(*)
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "peerId": "test-peer-id-1",
+  "room": {
+    "_id": "5f0040f7c91f2a16d73d5ecc"
+  }
+}
+
+###
+# UPDATE by id
+
+PUT {{baseUrl}}peers/5f004c3e3bfade1e9c797aa2?fields=_id,peerId,user(*),room(*),isDeleted
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "peerId":"test-peer-id-1-upd",
+  "isDeleted": false
+}
+
+###
+# DELETE by id
+
+DELETE {{baseUrl}}peers/5f004c3e3bfade1e9c797aa2?fields=_id,peerId,user(*),room(*),isDeleted
+X-Token:{{tokenAdmin}}
+Content-Type: application/json
+
+###

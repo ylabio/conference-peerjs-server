@@ -4,4 +4,5 @@ module.exports = {
   roles: require('./roles'),
   files: require('./files'),
   rooms: require('./rooms'),
+  peers: require('./peers'),
 };

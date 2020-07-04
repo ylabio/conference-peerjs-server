@@ -218,6 +218,7 @@ module.exports = async (router, services) => {
       phone: {fields: ['profile.phone']},
       isBlocked: {kind: 'bool', fields: ['isBlocked']}
     });
+
     if (req.query.changes) {
       return users.getListChanges({
         key: req.query.changes,
