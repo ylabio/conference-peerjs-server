@@ -24,6 +24,16 @@ class Peer extends Model {
             type: 'room',
             description: 'Комната',
           }),
+          dateConnect: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Дата и время подключения к Peer серверу'
+          },
+          dateDisconnect: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Дата и время отключения от Peer сервера'
+          },
         },
         required: ['peerId', 'user', 'room'],
       })
@@ -50,6 +60,42 @@ class Peer extends Model {
           $unset: []
         }
       },
+    });
+  }
+
+  async peerConnected({peerId}) {
+    const peers = await super.getList({
+      filter: {peerId},
+      sort: {dateCreate: -1},
+      limit: 1,
+      view: false,
+    });
+
+    if (peers.length === 0) {
+      return;
+    }
+
+    await super.updateOne({
+      id: peers[0]._id,
+      body: {dateConnect: Date.now()},
+    });
+  }
+
+  async peerDisconnected({peerId}) {
+    const peers = await super.getList({
+      filter: {peerId},
+      sort: {dateCreate: -1},
+      limit: 1,
+      view: false,
+    });
+
+    if (peers.length === 0) {
+      return;
+    }
+
+    await super.updateOne({
+      id: peers[0]._id,
+      body: {dateDisconnect: Date.now()},
     });
   }
 }
