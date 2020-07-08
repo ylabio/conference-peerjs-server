@@ -64,37 +64,37 @@ class Peer extends Model {
   }
 
   async peerConnected({peerId}) {
-    const peers = await super.getList({
+    const result = await super.getList({
       filter: {peerId},
       sort: {dateCreate: -1},
       limit: 1,
       view: false,
     });
 
-    if (peers.length === 0) {
+    if (result.items.length === 0) {
       return;
     }
 
     await super.updateOne({
-      id: peers[0]._id,
+      id: result.items[0]._id,
       body: {dateConnect: Date.now()},
     });
   }
 
   async peerDisconnected({peerId}) {
-    const peers = await super.getList({
+    const result = await super.getList({
       filter: {peerId},
       sort: {dateCreate: -1},
       limit: 1,
       view: false,
     });
 
-    if (peers.length === 0) {
+    if (result.items.length === 0) {
       return;
     }
 
     await super.updateOne({
-      id: peers[0]._id,
+      id: result.items[0]._id,
       body: {dateDisconnect: Date.now()},
     });
   }

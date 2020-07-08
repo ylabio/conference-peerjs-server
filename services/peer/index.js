@@ -5,7 +5,7 @@ class Peer {
     this.config = config;
     this.services = services;
     this.s = {
-      storage: await this.services.getStorage(this.config.mode),
+      storage: await this.services.getStorage(),
     };
     this.peerServer = null;
     return this;
@@ -21,8 +21,8 @@ class Peer {
       return this.peerServer;
     }
     this.peerServer = PeerServer(this.config);
-    this.peerServer.on('connection', this.onPeerConnect);
-    this.peerServer.on('disconnect', this.onPeerDisconnect);
+    this.peerServer.on('connection', (client) => this.onPeerConnect(client));
+    this.peerServer.on('disconnect', (client) => this.onPeerDisconnect(client));
     return this.peerServer;
   }
 
