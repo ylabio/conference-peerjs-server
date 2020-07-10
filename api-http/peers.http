@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 # CREATE one
 
-POST {{baseUrl}}peers?fields=_id,peerId,user(*),room(*)
+POST {{baseUrl}}peers?fields=_id,peerId,user(*),room(*),dateConnect,dateDisconnect
 X-Token:{{tokenAdmin}}
 Content-Type: application/json
 

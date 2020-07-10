@@ -1,4 +1,6 @@
 const Model = require('exser').Model;
+const ObjectID = require('exser').ObjectID;
+const moment = require('moment');
 
 class Peer extends Model {
 
@@ -27,12 +29,12 @@ class Peer extends Model {
           dateConnect: {
             type: 'string',
             format: 'date-time',
-            description: 'Дата и время подключения к Peer серверу'
+            description: 'Дата и время подключения к Peer серверу',
           },
           dateDisconnect: {
             type: 'string',
             format: 'date-time',
-            description: 'Дата и время отключения от Peer сервера'
+            description: 'Дата и время отключения от Peer сервера',
           },
         },
         required: ['peerId', 'user', 'room'],
@@ -63,6 +65,32 @@ class Peer extends Model {
     });
   }
 
+  async createOne({body, view = true, fields = {'*': 1}, session, validate, prepare, schema = 'create'}) {
+    const peer = await super.getOne({
+      filter: {
+        peerId: body.peerId,
+        'room._id': ObjectID(body.room._id),
+      },
+      throwNotFound: false,
+      fields,
+      session,
+    });
+    if (peer) {
+      return peer;
+    }
+
+    return await super.createOne({
+      body, view, fields, session, validate, schema,
+      prepare: async (parentPrepare, object) => {
+        const prepareDefault = (object) => {
+          parentPrepare(object);
+          object.dateConnect = moment().toISOString();
+        };
+        await (prepare ? prepare(prepareDefault, object) : prepareDefault(object));
+      }
+    });
+  }
+
   async peerConnected({peerId}) {
     const result = await super.getList({
       filter: {peerId},
@@ -77,7 +105,7 @@ class Peer extends Model {
 
     await super.updateOne({
       id: result.items[0]._id,
-      body: {dateConnect: Date.now()},
+      body: {dateConnect: moment().toISOString()},
     });
   }
 
@@ -95,7 +123,7 @@ class Peer extends Model {
 
     await super.updateOne({
       id: result.items[0]._id,
-      body: {dateDisconnect: Date.now()},
+      body: {dateDisconnect: moment().toISOString()},
     });
   }
 }
