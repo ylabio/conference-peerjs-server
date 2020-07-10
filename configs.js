@@ -18,7 +18,7 @@ module.exports = {
        * - '*' - все хосты
        */
       origin: [
-        'http://localhost:8161',
+        'http://localhost:8030',
       ]
     },
   },

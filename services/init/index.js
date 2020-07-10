@@ -120,6 +120,7 @@ class Init {
         {name: 'rust', title: {ru: 'Rust', en: 'Rust'}, description: {ru: 'Конференция Rust разработчиков', en: 'Rust developers conference'}},
         {name: 'managers', title: {ru: 'Managers', en: 'Managers'}, description: {ru: 'Конференция менеджеров', en: 'Managers conference'}},
         {name: 'accountants', title: {ru: 'Accountants', en: 'Accountants'}, description: {ru: 'Конференция бухгалтеров', en: 'Accountants conference'}},
+        {name: 'testers', title: {ru: 'Testers', en: 'Testers'}, description: {ru: 'Конференция тестировщиков', en: 'Testers conference'}},
       ];
       this.data[type] = [];
       for (let body of items) {
