@@ -17,7 +17,7 @@
     "exser": "^1.4.17",
     "formidable": "^1.2.2",
     "moment": "^2.27.0",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "peer": "^0.5.3"
   },
   "devDependencies": {
