@@ -16,7 +16,7 @@
     "eslint": "^7.4.0",
     "exser": "^1.4.17",
     "formidable": "^1.2.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "nodemailer": "^6.4.10",
     "peer": "^0.5.3"
   },
